@@ -11,7 +11,7 @@
 
 ## Abstract
 
-Accurate skin lesion segmentation is crucial for early melanoma detection and reliable medical diagnosis. Recently, such generative diffusion-based segmentation models have achieved state-of-the-art performance in this task. However, their large number of parameters hinders the deployment in real-world clinical and mobile settings. A key challenge is how to compress these models while preserving their reliability in diagnosis. 
+> **Abstract:** Accurate skin lesion segmentation is crucial for early melanoma detection and reliable medical diagnosis. Recently, such generative diffusion-based segmentation models have achieved state-of-the-art performance in this task. However, their large number of parameters hinders the deployment in real-world clinical and mobile settings. A key challenge is how to compress these models while preserving their reliability in diagnosis. 
 
 To this end, we propose an **edge-focused knowledge distillation (EFKD)** strategy for the generative diffusion-based skin lesion segmentation, prioritizing contour information transfer from teacher to student. Accordingly, we introduce **LiteDermoSegDiff**, a lightweight diffusion-based lesion segmentation model that integrates knowledge distillation with boundary-aware supervision. This design ensures that the student network maintains sharp lesion boundaries while significantly reducing model parameters. 
 
