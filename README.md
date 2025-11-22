@@ -1,18 +1,13 @@
-# LiteDermoSegDiff
+# A Knowledge Distillation Approach for Diffusion-based Generative Skin Lesion Segmentation
 
-*A Knowledge Distillation Approach for Diffusion-based Generative Skin Lesion Segmentation*
 
 ## Table of Contents
 
 - [Abstract](#abstract)
 - [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Dataset Preparation](#dataset-preparation)
 - [Training](#training)
 - [Testing](#testing)
-- [Configuration](#configuration)
 - [Results](#results)
-- [Citation](#citation)
 
 ## Abstract
 
@@ -22,7 +17,7 @@ To this end, we propose an **edge-focused knowledge distillation (EFKD)** strate
 
 Extensive experiments on the common ISIC2018 and HAM10000 dermoscopic benchmarks demonstrate that our method achieves up to **88.9% parameter reduction** while maintaining competitive segmentation accuracy. These results show that diffusion-based segmentation models can be substantially compressed without compromising boundary awareness, paving the way for efficient and clinically deployable solutions in resource-constrained environments.
 
-![EFKD Framework](images/EFKD.png)
+![EFKD Framework](image/EFKD.png)
 
 ## Installation
 
@@ -107,6 +102,7 @@ To run with specific model weights, modify your config file at testing->model_we
 ```bash
 python src/testing.py -c /path/to/config/file
 ```
+## Results
 
 ### Model Efficiency Comparison
 
