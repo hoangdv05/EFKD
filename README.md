@@ -17,7 +17,7 @@ To this end, we propose an **edge-focused knowledge distillation (EFKD)** strate
 
 Extensive experiments on the common ISIC2018 and HAM10000 dermoscopic benchmarks demonstrate that our method achieves up to **88.9% parameter reduction** while maintaining competitive segmentation accuracy. These results show that diffusion-based segmentation models can be substantially compressed without compromising boundary awareness, paving the way for efficient and clinically deployable solutions in resource-constrained environments.
 
-![EFKD Framework](image/EFKD.png)
+![EFKD Framework](image/EFKD.jpg)
 
 ## Installation
 
