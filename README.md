@@ -1,4 +1,4 @@
-# A Knowledge Distillation Approach for Diffusion-based Generative Skin Lesion Segmentation
+# EFKD: A Knowledge Distillation Approach for Diffusion-based Generative Skin Lesion Segmentation
 
 This repository provides the official and fully reproducible implementation of the paper: **A Knowledge Distillation Approach for Diffusion-based Generative Skin Lesion Segmentation**
 
@@ -131,5 +131,6 @@ We provide the learned weights in the following.
 ## Acknowledgments
 
 This work is built upon [DermoSegDiff](https://github.com/xmindflow/DermoSegDiff). We thank the authors for their excellent work and open-source contribution.
+
 
 
