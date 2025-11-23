@@ -102,7 +102,7 @@ python src/testing.py -c /path/to/config/file
 
 ### Model weights
 
-We provide the learn weights in the following. 
+We provide the learned weights in the following. 
 
 | Datasets | Teacher Weight | Student Weight |
 |----------|----------------|----------------|
