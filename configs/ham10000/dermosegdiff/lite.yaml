@@ -6,7 +6,7 @@ run:
 
 model:
   save_dir: "/mnt/mmlab2024nas/danh/hoangdv/LiteDermoSegDiff/HAM10000/model"
-  name: 'dsd_h01_9M_0.5' # the model will save and load with this config associated with this name.
+  name: 'dsd_h01' # the model will save and load with this config associated with this name.
   class: 'LiteDermoSegDiff' # student model class
   # Teacher configuration (explicit to avoid shape mismatches)
   teacher_checkpoint: "/mnt/mmlab2024nas/danh/hoangdv/DermoSegDiff/HAM10000/models/n-dsd_h01_s-128_b-16_t-250_sc-linear_best.pth"
@@ -72,23 +72,17 @@ training:
   intial_weights:
     use: false
     file_path: "path/to/file"
-  loss: # Enhanced Knowledge Distillation with multiple state-of-the-art methods
-    # 1. Base L2 loss (for stability)
+  loss:
     l2:
       coefficient: 1.0
-      
-    # 2. Progressive Distillation (Salimans et al.)
         
-    # 3. Boundary-Privileged KD (BPKD)
-    boundary_privileged_kd:
+    edge_focused_kd:
       coefficient: 0.25
       params:
         edge_weight: 5.0
         body_weight: 2.0
-        edge_threshold: 0.5
-        temperature: 1.0
+        edge_threshold: 0.6
         
-    # 7. Original boundary loss
     boundary:
       coefficient: 0.2
       params:

@@ -3,7 +3,7 @@ from common.logging import get_logger
 from utils.helper_funcs import calc_boundary_att
 
 
-"""Losses for KD training: L2, Boundary, and BPKD only."""
+"""Losses for KD training: L2, Boundary, and EFKD only."""
 
 
 # Global variable for boundary loss instance
@@ -31,19 +31,19 @@ class BoundaryLoss(torch.nn.Module):
         return (boundary_att * root_loss).mean()
 
 
-def boundary_privileged_kd_loss(student_pred, teacher_pred, x_start, t, T, bpkd_config):
+def edge_focused_kd_loss(student_pred, teacher_pred, x_start, t, T, efkd_config):
     """
-    Boundary-Privileged Knowledge Distillation (BPKD) Loss
+    Edge-Focused Knowledge Distillation (EFKD) Loss
     Separates edge and body regions with different weights for edge preservation
     """
-    edge_weight = bpkd_config.get("edge_weight", 3.0)
-    body_weight = bpkd_config.get("body_weight", 1.0)
+    edge_weight = efkd_config.get("edge_weight", 3.0)
+    body_weight = efkd_config.get("body_weight", 1.0)
     
     # Calculate boundary attention map
     boundary_att = calc_boundary_att(x_start, t, T, gamma=1.5)
     
     # Create edge and body masks
-    edge_threshold = bpkd_config.get("edge_threshold", 0.7)
+    edge_threshold = efkd_config.get("edge_threshold", 0.7)
     edge_mask = (boundary_att > edge_threshold).float()
     body_mask = (boundary_att <= edge_threshold).float()
     
@@ -126,11 +126,11 @@ def p_losses_kd(
     if "l2" in cfg_loss.keys():
         losses["l2"] = torch.nn.functional.mse_loss(student_predicted_noise, noise)
 
-    # 2. Boundary-Privileged KD (BPKD)
-    if "boundary_privileged_kd" in cfg_loss.keys():
-        bpkd_config = cfg_loss["boundary_privileged_kd"].get("params", {})
-        losses["boundary_privileged_kd"] = boundary_privileged_kd_loss(
-            student_predicted_noise, teacher_predicted_noise, x_start, t, T, bpkd_config
+    # 2. Edge-Focused KD (EFKD)
+    if "edge_focused_kd" in cfg_loss.keys():
+        efkd_config = cfg_loss["edge_focused_kd"].get("params", {})
+        losses["edge_focused_kd"] = edge_focused_kd_loss(
+            student_predicted_noise, teacher_predicted_noise, x_start, t, T, efkd_config
         )
 
     # 3. Boundary loss (original)

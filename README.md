@@ -100,6 +100,15 @@ python src/testing.py -c /path/to/config/file
 ```
 ## Results
 
+### Model weights
+
+We provide the learn weights in the following. 
+
+|Datasets| Teacher Weight| Student weight|
+|--------|---------------|---------------|
+|ISIC2018|[Link](https://drive.google.com/file/d/1y5rQRlCp3xHVoMHAt7QgZltyknKMWrnp/view?usp=sharing)|[Link](https://drive.google.com/file/d/1FAumwEr8bAXLD-RmmlBQogL5T_xJxLE2/view?usp=sharing)|
+|HAM10000|[Link](https://drive.google.com/file/d/1Fg6MAgxtb6gGA2ZNTdRGC85GNCOJkkm3/view?usp=sharing)|[Link](https://drive.google.com/file/d/1y5rQRlCp3xHVoMHAt7QgZltyknKMWrnp/view?usp=sharing)|
+
 ### Model Efficiency Comparison
 
 | Model | Dataset | GFlops | FPS | Memory Usage (MB) |

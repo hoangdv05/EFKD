@@ -1,12 +1,12 @@
 run:
   device: 'cuda'
   save_imgs: "saved_imgs"
-  writer_dir: "/mnt/mmlab2024nas/danh/hoangdv/LiteDermoSegDiff/ISIC2018/logs" # tensorboard runs
-  continue_training: false # whether to continue the training from the last epoch it was saved
+  writer_dir: "/mnt/mmlab2024nas/danh/hoangdv/LiteDermoSegDiff/ISIC2018/logs" 
+  continue_training: false 
 
 model:
   save_dir: "/mnt/mmlab2024nas/danh/hoangdv/LiteDermoSegDiff/ISIC2018/model"
-  name: 'dsd_p01_9M_0.3' # the model will save and load with this config associated with this name.
+  name: 'dsd_p01' 
   class: 'LiteDermoSegDiff' # student model class
   # Teacher configuration (explicit to avoid shape mismatches)
   teacher_checkpoint: "/mnt/mmlab2024nas/danh/hoangdv/DermoSegDiff/ISIC2018/model/n-dsd_i01_s-128_b-16_t-250_sc-linear_best.pth"
@@ -31,7 +31,6 @@ model:
     dim_x_mults: [1, 2, 3]  # Explicit x multipliers
     dim_g_mults: [1, 2, 4]  # Explicit g multipliers
     resnet_block_groups: 4 # Reduced GN groups
-    use_separable_conv: false  # Use depthwise separable convs
 
 diffusion:
   schedule:
@@ -72,15 +71,11 @@ training:
   intial_weights:
     use: false
     file_path: "path/to/file"
-  loss: # Enhanced Knowledge Distillation with multiple state-of-the-art methods
-    # 1. Base L2 loss (for stability)
+  loss:
     l2:
       coefficient: 1.0
-      
-    # 2. Progressive Distillation (Salimans et al.)
         
-    # 3. Boundary-Privileged KD (BPKD)
-    boundary_privileged_kd:
+    edge_focused_kd:
       coefficient: 0.25
       params:
         edge_weight: 5.0
@@ -88,13 +83,6 @@ training:
         edge_threshold: 0.3
         temperature: 1.0
         
-    # Boundary & Context KD (BCKD) removed as requested
-        
-    # Graph Relation Distillation removed as requested
-        
-    # 6. Standard KD loss
-        
-    # 7. Original boundary loss
     boundary:
       coefficient: 0.25
       params:

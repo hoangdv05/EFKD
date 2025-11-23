@@ -49,9 +49,9 @@ if "l2" in training_loss:
 if "boundary" in training_loss:
     boundary_config = training_loss["boundary"]
     loss_components.append(f"Boundary (coeff={boundary_config.get('coefficient', 1.0)})")
-if "boundary_privileged_kd" in training_loss:
-    bpkd_config = training_loss["boundary_privileged_kd"]
-    loss_components.append(f"BPKD (coeff={bpkd_config.get('coefficient', 1.0)})")
+if "edge_focused_kd" in training_loss:
+    efkd_config = training_loss["edge_focused_kd"]
+    loss_components.append(f"EFKD (coeff={efkd_config.get('coefficient', 1.0)})")
 
 if loss_components:
     logger.info(f"Loss components: {', '.join(loss_components)}")
@@ -343,8 +343,8 @@ logger.info(f"=== Starting Knowledge Distillation Training for {epochs} epochs =
 loss_config = config['training']['loss']
 enabled_methods = []
 for method_name in loss_config.keys():
-    if method_name == 'boundary_privileged_kd':
-        enabled_methods.append("Boundary-Privileged KD (BPKD)")
+    if method_name == 'edge_focused_kd':
+        enabled_methods.append("Edge-Focused KD (EFKD)")
     elif method_name in ['l2', 'boundary']:
         enabled_methods.append(f"{method_name.upper()} loss")
 
@@ -422,10 +422,10 @@ for epoch in range(start_epoch, epochs):
     writer.add_scalar("Learning_Rate", current_lr, epoch)
 
     # Enhanced logging with method breakdown
-    bpkd_losses_tr = {k: v for k, v in tr_losses_dict.items() if k == 'boundary_privileged_kd'}
+    efkd_losses_tr = {k: v for k, v in tr_losses_dict.items() if k == 'edge_focused_kd'}
     base_losses_tr = {k: v for k, v in tr_losses_dict.items() if k in ['l2', 'boundary']}
     
-    bpkd_losses_vl = {k: v for k, v in vl_losses_dict.items() if k == 'boundary_privileged_kd'}
+    efkd_losses_vl = {k: v for k, v in vl_losses_dict.items() if k == 'edge_focused_kd'}
     base_losses_vl = {k: v for k, v in vl_losses_dict.items() if k in ['l2', 'boundary']}
     
     # Main training info
@@ -439,11 +439,11 @@ for epoch in range(start_epoch, epochs):
         performance_gap = ((vl_loss - teacher_vl_loss) / teacher_vl_loss) * 100
         logger.info(f"Teacher baseline: {teacher_vl_loss:0.8f}, Performance gap: {performance_gap:+.2f}%")
     
-    # BPKD method breakdown
-    if bpkd_losses_tr:
-        logger.info(f"\nBPKD Method:")
-        if 'boundary_privileged_kd' in bpkd_losses_tr:
-            logger.info(f"  - BPKD           : tr={bpkd_losses_tr['boundary_privileged_kd']:0.6f}, vl={bpkd_losses_vl['boundary_privileged_kd']:0.6f}")
+    # EFKD method breakdown
+    if efkd_losses_tr:
+        logger.info(f"\nEFKD Method:")
+        if 'edge_focused_kd' in efkd_losses_tr:
+            logger.info(f"  - EFKD           : tr={efkd_losses_tr['edge_focused_kd']:0.6f}, vl={efkd_losses_vl['edge_focused_kd']:0.6f}")
     
     # Base losses
     if base_losses_tr:

@@ -27,7 +27,7 @@ def train_kd(
     logger=None
 ):
     """
-    Knowledge Distillation training function using L2, Boundary, and BPKD losses
+    Knowledge Distillation training function using L2, Boundary, and EFKD losses
     """
     if ema: 
         student_model = ema.model
@@ -120,7 +120,7 @@ def validate_kd(
     logger=None
 ):
     """
-    Knowledge Distillation validation function using L2, Boundary, and BPKD losses
+    Knowledge Distillation validation function using L2, Boundary, and EFKD losses
     """
     
     losses = []
