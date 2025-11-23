@@ -37,4 +37,3 @@ class PreNorm(nn.Module):
         return self.fn(x)
 
 
-# Legacy Lite* down/up-sampling blocks have been removed; use standard Upsample/Downsample instead.
