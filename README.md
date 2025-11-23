@@ -4,14 +4,6 @@ This repository provides the official and fully reproducible implementation of t
 
 Authors: Viet-Hoang Doan, Thanh-Danh Nguyen†, Tuan-Kiet Ngo and Vinh-Tiep Nguyen.
 
-## Table of Contents
-
-- [Abstract](#abstract)
-- [Installation](#installation)
-- [Training](#training)
-- [Testing](#testing)
-- [Results](#results)
-
 ## Abstract
 
 > **Abstract:** Accurate skin lesion segmentation is crucial for early melanoma detection and reliable medical diagnosis. Recently, such generative diffusion-based segmentation models have achieved state-of-the-art performance in this task. However, their large number of parameters hinders the deployment in real-world clinical and mobile settings. A key challenge is how to compress these models while preserving their reliability in diagnosis. To this end, we propose an **edge-focused knowledge distillation (EFKD)** strategy for the generative diffusion-based skin lesion segmentation, prioritizing contour information transfer from teacher to student. Accordingly, we introduce **LiteDermoSegDiff**, a lightweight diffusion-based lesion segmentation model that integrates knowledge distillation with boundary-aware supervision. This design ensures that the student network maintains sharp lesion boundaries while significantly reducing model parameters. Extensive experiments on the common ISIC2018 and HAM10000 dermoscopic benchmarks demonstrate that our method achieves up to **88.9% parameter reduction** while maintaining competitive segmentation accuracy. These results show that diffusion-based segmentation models can be substantially compressed without compromising boundary awareness, paving the way for efficient and clinically deployable solutions in resource-constrained environments.
@@ -131,6 +123,7 @@ We provide the learned weights in the following.
 ## Acknowledgments
 
 This work is built upon [DermoSegDiff](https://github.com/xmindflow/DermoSegDiff). We thank the authors for their excellent work and open-source contribution.
+
 
 
 
